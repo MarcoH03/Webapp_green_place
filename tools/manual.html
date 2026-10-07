@@ -1,0 +1,659 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Manual de uso · Green Place</title>
+<style>
+  @font-face { font-family: 'Roboto'; font-weight: 400; src: url(../fonts/roboto-latin-400-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Roboto'; font-weight: 500; src: url(../fonts/roboto-latin-500-normal.woff2) format('woff2'); }
+  @font-face { font-family: 'Roboto'; font-weight: 700; src: url(../fonts/roboto-latin-700-normal.woff2) format('woff2'); }
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  :root { --ink: #171d18; --muted: #5b635b; --line: #dfe4dc; --green: #1f6c3b; --soft: #eef3eb; --red: #ba1a1a; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Roboto', Arial, sans-serif; color: var(--ink); font-size: 10.6pt; line-height: 1.5; margin: 0; }
+  h1, h2, h3 { line-height: 1.2; font-weight: 500; }
+  h2 { font-size: 19pt; margin: 0 0 4mm; color: var(--ink); break-after: avoid; }
+  h2 .n { color: var(--green); margin-right: 6px; }
+  h3 { font-size: 12.5pt; margin: 6mm 0 2mm; break-after: avoid; color: var(--green); }
+  p { margin: 0 0 2.6mm; }
+  ul, ol { margin: 0 0 3mm; padding-left: 6mm; }
+  li { margin-bottom: 1.2mm; }
+  b { font-weight: 500; }
+  section { break-before: page; }
+  section.cont { break-before: auto; margin-top: 9mm; }
+  figure { width: 50mm; margin: 0; text-align: center; break-inside: avoid; }
+  figure img { width: 100%; border-radius: 6mm; border: 1.4mm solid #1c1c1c; box-shadow: 0 2mm 6mm rgba(0,0,0,.12); display: block; }
+  figcaption { font-size: 8.5pt; color: var(--muted); margin-top: 2mm; line-height: 1.3; }
+  .split { display: grid; grid-template-columns: 1fr 50mm; gap: 7mm; align-items: start; margin-bottom: 4mm; }
+  .split.left { grid-template-columns: 50mm 1fr; }
+  .split .txt > :first-child { margin-top: 0; }
+  .pair, .trio { display: flex; gap: 6mm; justify-content: center; margin: 4mm 0; break-inside: avoid; }
+  .trio figure { width: 46mm; }
+  .tip, .warn, .note { border-radius: 3mm; padding: 3mm 4mm; margin: 3mm 0 4mm; break-inside: avoid; }
+  .tip { background: #e3f6e7; border-left: 1.2mm solid #2f8f4e; }
+  .warn { background: #fff1db; border-left: 1.2mm solid #e09a00; }
+  .note { background: #e6eeff; border-left: 1.2mm solid #3a5ba9; }
+  .tip > b:first-child, .warn > b:first-child, .note > b:first-child { display: block; margin-bottom: 1mm; }
+  table { border-collapse: collapse; width: 100%; margin: 2mm 0 4mm; font-size: 9.8pt; break-inside: avoid; }
+  th, td { text-align: left; padding: 1.8mm 2.4mm; border-bottom: 0.3mm solid var(--line); vertical-align: top; }
+  th { background: var(--soft); font-weight: 500; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .k { display: inline-block; padding: 0 2mm; border-radius: 1.5mm; background: var(--soft); border: 0.3mm solid var(--line); font-weight: 500; font-size: 9.5pt; white-space: nowrap; }
+  .steps { counter-reset: s; list-style: none; padding-left: 0; }
+  .steps > li { counter-increment: s; position: relative; padding-left: 9mm; margin-bottom: 2.4mm; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0.2mm; width: 6mm; height: 6mm; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; font-size: 8.5pt; display: grid; place-items: center; }
+  pre { background: var(--soft); border-radius: 3mm; padding: 3mm 4mm; font-family: inherit; font-size: 9pt; line-height: 1.4; white-space: pre-wrap; margin: 2mm 0 4mm; break-inside: avoid; }
+  .formula { font-variant-numeric: tabular-nums; background: var(--soft); border-radius: 2mm; padding: 2.4mm 3.5mm; display: block; margin: 1.5mm 0 3mm; font-weight: 500; }
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 8mm; break-after: page; }
+  .cover img { width: 32mm; border-radius: 8mm; box-shadow: 0 3mm 8mm rgba(0,0,0,.2); }
+  .cover h1 { font-size: 40pt; margin: 9mm 0 2mm; font-weight: 400; }
+  .cover .sub { font-size: 15pt; color: var(--muted); margin-bottom: 12mm; }
+  .cover .meta { font-size: 10pt; color: var(--muted); border-top: 0.3mm solid var(--line); padding-top: 4mm; width: 100%; margin-top: 8mm; }
+  .toc { columns: 2; column-gap: 10mm; padding-left: 5mm; }
+  .toc li { break-inside: avoid; }
+  .check { list-style: none; padding-left: 0; }
+  .check li { padding-left: 7mm; position: relative; }
+  .check li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .faq dt { font-weight: 500; margin-top: 3mm; break-after: avoid; }
+  .faq dd { margin: 1mm 0 0 0; color: #2b322b; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <img src="../icons/icon-512.png" alt="">
+  <h1>Green Place</h1>
+  <div class="sub">Manual de uso de la app del puesto</div>
+  <p style="max-width:145mm">Inventario, precios en CUP calculados con el cambio del dólar del día, ventas, compras, gastos, estadísticas y el <b>cierre de cada día</b> para comprobar que el dinero de la caja cuadra. Hecha para teléfonos Android, funciona sin internet y guarda todo en el teléfono.</p>
+  <div class="trio" style="justify-content:flex-start;margin-top:6mm">
+    <figure><img src="../preview/01-inicio.png" alt=""></figure>
+    <figure><img src="../preview/05-carrito.png" alt=""></figure>
+    <figure><img src="../preview/25-informes-semana.png" alt=""></figure>
+  </div>
+  <div class="meta">Versión 1.0 · Dirección de la app: <b>https://marcoh03.github.io/Webapp_green_place/</b></div>
+</div>
+
+<section style="break-before:auto">
+  <h2>Contenido</h2>
+  <ol class="toc">
+    <li>Qué hace la app</li>
+    <li>Instalarla en el teléfono Android</li>
+    <li>Primer uso</li>
+    <li>El cambio del dólar</li>
+    <li>Cómo calcula los precios</li>
+    <li>La pantalla Inicio</li>
+    <li>Vender</li>
+    <li>Historial, detalle y anular ventas</li>
+    <li>Productos e inventario</li>
+    <li>Registrar compras de mercancía</li>
+    <li>Mermas, consumo propio y conteo</li>
+    <li>Gastos del negocio</li>
+    <li>El dinero: caja y transferencias</li>
+    <li>El cierre del día</li>
+    <li>Informes y estadísticas</li>
+    <li>Ajustes y copias de seguridad</li>
+    <li>La rutina de cada día</li>
+    <li>Preguntas frecuentes</li>
+    <li>Anexo: publicar y actualizar la app</li>
+  </ol>
+
+  <h2 style="margin-top:10mm"><span class="n">1</span>Qué hace la app</h2>
+  <p>Green Place lleva las cuentas del puesto para que no haya que recordarlas de memoria:</p>
+  <ul>
+    <li><b>Inventario</b>: cuántas unidades quedan de cada producto. Se suma al registrar una compra y se resta con cada venta.</li>
+    <li><b>Precios en CUP según el dólar</b>: la mercancía se compra en dólares y se vende en pesos. La app convierte el costo con el cambio del día, <b>sugiere un precio un 30% por encima</b> (puedes cambiarlo) y te dice el <b>precio mínimo</b> para no perder dinero.</li>
+    <li><b>Avisos de pérdida</b>: cuando sube el dólar, avisa de los productos que se están vendiendo por debajo de lo que costaron.</li>
+    <li><b>Ventas</b> rápidas con carrito, cálculo del vuelto y pago en efectivo, transferencia o mixto.</li>
+    <li><b>Gastos</b> que no son mercancía: mensajerías, transporte, impuestos, corriente, imprevistos…</li>
+    <li><b>Estadísticas</b> del día, la semana, el mes o el año: lo vendido, la ganancia, los gastos, la ganancia neta y los productos que más se venden.</li>
+    <li><b>Cierre del día</b>: resumen de ventas y ganancia y comprobación del efectivo contado contra lo que debería haber.</li>
+  </ul>
+  <div class="note"><b>Las ventas no cambian cuando cambias un precio.</b>Cada venta guarda el precio al que se vendió, lo que costó la mercancía y el cambio del dólar de ese momento. Si mañana subes un precio, lo que entró ayer sigue siendo lo que entró ayer: no se suma dinero de más al fondo ni cambia ninguna ganancia anterior.</div>
+  <div class="tip"><b>Tus datos son tuyos.</b>Todo se guarda solo en el teléfono, no en internet. Por eso es importante hacer una copia de seguridad de vez en cuando (capítulo 16).</div>
+</section>
+
+<section>
+  <h2><span class="n">2</span>Instalarla en el teléfono Android</h2>
+  <div class="split">
+    <div class="txt">
+      <p>La app es una página web que se instala como una aplicación más: con su icono, a pantalla completa y funcionando <b>sin internet</b> después de la primera vez.</p>
+      <ol class="steps">
+        <li>Abre <b>Google Chrome</b> en el teléfono y entra en<br><b>marcoh03.github.io/Webapp_green_place</b></li>
+        <li>Chrome suele mostrar abajo «<b>Instalar aplicación</b>». Si no aparece, toca el menú <span class="k">⋮</span> (arriba a la derecha) y elige <b>Instalar aplicación</b> o <b>Añadir a pantalla de inicio</b>.</li>
+        <li>Confirma con <b>Instalar</b>. Aparecerá el icono verde de <b>Green Place</b> en la pantalla de inicio.</li>
+        <li>Ábrela siempre desde ese icono.</li>
+      </ol>
+      <p>Mientras no esté instalada, la pantalla Inicio muestra un aviso verde «<b>Instala la app</b>» que hace lo mismo. También está en <b>Ajustes → Instalar en el teléfono</b>.</p>
+      <div class="tip"><b>Actualizaciones</b>Cuando haya una versión nueva, aparecerá arriba «Hay una nueva versión de la app. Toca para actualizar». Los datos no se pierden al actualizar.</div>
+      <div class="warn"><b>Usa siempre el mismo teléfono y el mismo navegador.</b>Los datos se guardan dentro de la app instalada. Si la abres en otro teléfono o en otro navegador estará vacía. Para pasar los datos a otro teléfono usa la copia de seguridad.</div>
+      <p>El botón <b>Atrás</b> del teléfono (o el gesto de deslizar desde el borde) cierra la pantalla o el diálogo que tengas abierto, y desde otra pestaña te devuelve a Inicio.</p>
+    </div>
+    <figure><img src="../preview/39-instalar.png" alt=""><figcaption>Las instrucciones también están en Ajustes.</figcaption></figure>
+  </div>
+
+  <section class="cont" style="break-before:auto">
+  <h2><span class="n">3</span>Primer uso</h2>
+  <div class="split">
+    <div class="txt">
+      <p>La primera vez se abre la pantalla de <b>bienvenida</b>:</p>
+      <ul>
+        <li><b>Tu nombre</b> (opcional): para saludarte.</li>
+        <li><b>¿A cuánto está hoy el dólar?</b> Cuántos CUP vale 1 USD en el mercado informal.</li>
+        <li><b>Ganancia que quieres sobre el costo</b>: 30% de forma predeterminada. Se puede cambiar después en Ajustes.</li>
+        <li><b>Efectivo que tienes ahora en la caja</b> (opcional): el dinero con el que empiezas, para que el cierre del día sepa de dónde partir.</li>
+      </ul>
+      <p>Toca <b>Empezar</b>. La app te propone añadir tu primer producto.</p>
+    </div>
+    <figure><img src="../preview/00-bienvenida.png" alt=""><figcaption>Pantalla de bienvenida.</figcaption></figure>
+  </div>
+  </section>
+</section>
+
+<section>
+  <h3 style="margin-top:0">Añadir los productos que ya tienes</h3>
+  <div class="split">
+    <div class="txt">
+      <p>En la pestaña <b>Productos</b> toca <span class="k">+ Nuevo</span> → <b>Nuevo producto</b> y rellena:</p>
+      <ul>
+        <li><b>Nombre</b>, <b>categoría</b> (Confituras, Primera necesidad, Bebidas, Aseo… o una nueva) y cómo se vende (<b>unidad</b>, paquete, caja, kg…).</li>
+        <li><b>Costo de compra</b> por unidad. Normalmente en <b>USD</b>; si lo pagaste en pesos, toca <b>CUP</b> y la app lo convierte con el cambio de hoy.</li>
+        <li><b>Precio de venta</b>: se rellena solo con el <b>sugerido</b>. Puedes escribir otro. Debajo ves el <b>mínimo sin perder</b>, el sugerido (con el botón <b>Usar</b>) y cuánto ganas con el precio escrito.</li>
+        <li><b>Stock inicial</b>: cuántas tienes ahora en el puesto.</li>
+        <li><b>Aviso de poco stock</b>: cuando queden esas unidades o menos, la app te avisa en Inicio.</li>
+      </ul>
+      <p>Toca <b>Guardar</b>. Repite con cada producto. Después, la mercancía nueva se añade con <b>Registrar compra</b> (capítulo 10), no creando el producto otra vez.</p>
+    </div>
+    <figure><img src="../preview/17-producto-nuevo.png" alt=""><figcaption>Nuevo producto: con un costo de 2.10 USD y el dólar a 450, sugiere 1,230 CUP.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">4</span>El cambio del dólar</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Todos los precios mínimos y sugeridos dependen del cambio. Por eso:</p>
+      <ul>
+        <li><b>Cada día, la primera vez que abres la app</b>, te pregunta a cuánto está el dólar hoy. Aparece escrito el último valor: si no ha cambiado, solo toca <b>Guardar</b>. Con <b>Más tarde</b> no vuelve a preguntar ese día.</li>
+        <li>Puedes <b>cambiarlo en cualquier momento</b>: toca el número del cambio arriba a la derecha (por ejemplo <span class="k">⇄ 450</span>), la tarjeta verde «Cambio de hoy» de Inicio o <b>Ajustes → Cambio del dólar</b>.</li>
+        <li>Si el cambio no es de hoy, la tarjeta y el número se ponen <b>naranjas</b>.</li>
+      </ul>
+      <p>En <b>Ajustes → Historial del cambio</b> queda la lista de todos los valores anotados con fecha y hora, y cuánto subió o bajó cada vez.</p>
+      <div class="note"><b>Cambiarlo no altera lo anterior.</b>Las ventas, gastos y compras ya anotados conservan el cambio que había cuando se hicieron.</div>
+    </div>
+    <figure><img src="../preview/03-cambio-del-dia.png" alt=""><figcaption>La pregunta diaria del cambio.</figcaption></figure>
+  </div>
+  <h3>Aviso cuando un producto da pérdida</h3>
+  <div class="split left">
+    <figure><img src="../preview/13-aviso-perdida.png" alt=""><figcaption>Al guardar un cambio más alto.</figcaption></figure>
+    <div class="txt">
+      <p>Si al anotar el nuevo cambio hay productos cuyo precio queda <b>por debajo de lo que costaron</b> (convertido a CUP con el cambio de ahora), la app te avisa enseguida: «El dólar subió… si los vendes así pierdes dinero».</p>
+      <p>Además, mientras haya productos así, la pantalla Inicio muestra un aviso <b>rojo</b> con sus nombres, y en la lista de productos llevan la etiqueta <b>Pérdida</b>.</p>
+      <p>Toca <b>Revisar precios</b> para ir a la pantalla de revisión (página siguiente).</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h3 style="margin-top:0">Revisar precios</h3>
+  <div class="split">
+    <div class="txt">
+      <p>Muestra cada producto con pérdida o con ganancia baja: el precio <b>actual</b>, el <b>mínimo</b> sin perder y el <b>sugerido</b>.</p>
+      <ul>
+        <li>Marca los que quieras y toca <b>Poner precio sugerido</b>: se actualizan todos de una vez.</li>
+        <li>Toca el nombre de un producto para escribir otro precio a tu gusto.</li>
+      </ul>
+      <p>También se abre desde <b>Productos → ⋮ → Revisar precios con pérdida</b> o tocando el aviso rojo de Inicio.</p>
+      <div class="tip"><b>¿Qué es «Ganancia baja»?</b>El precio cubre el costo pero ganas menos del 10% (se puede cambiar en Ajustes). Es un aviso amarillo: todavía no pierdes, pero estás cerca.</div>
+    </div>
+    <figure><img src="../preview/14-revisar-precios.png" alt=""><figcaption>Dos productos quedaron por debajo del costo.</figcaption></figure>
+  </div>
+
+  <section class="cont" style="break-before:auto">
+  <h2><span class="n">5</span>Cómo calcula los precios</h2>
+  <p>Con el <b>costo en dólares</b> de cada producto y el <b>cambio de hoy</b>:</p>
+  <span class="formula">Precio mínimo = costo en USD × cambio de hoy</span>
+  <span class="formula">Precio sugerido = precio mínimo + 30%, redondeado hacia arriba a 10 CUP</span>
+  <table>
+    <tr><th>Ejemplo: galletas que costaron 0.90 USD</th><th class="num">Dólar a 400</th><th class="num">Dólar a 450</th></tr>
+    <tr><td>Precio mínimo (lo que te costó en CUP)</td><td class="num">360 CUP</td><td class="num">405 CUP</td></tr>
+    <tr><td>Precio sugerido (+30%)</td><td class="num">470 CUP</td><td class="num">530 CUP</td></tr>
+    <tr><td>Si las vendes a 380 CUP…</td><td class="num">ganas 20</td><td class="num" style="color:var(--red)">pierdes 25</td></tr>
+  </table>
+  <ul>
+    <li>El <b>30%</b> y el <b>redondeo</b> (a 1, 5, 10, 50 o 100 CUP) se cambian en <b>Ajustes → Precios</b>.</li>
+    <li><b>Costo promedio</b>: si compras el mismo producto a precios distintos, la app usa el promedio de lo que tienes. Por ejemplo, 10 refrescos a 0.60 y 10 a 0.70 USD dan un costo de 0.65 USD.</li>
+    <li>La <b>ganancia</b> de cada venta es lo cobrado menos lo que costó esa mercancía, convertido con el cambio del momento de la venta.</li>
+  </ul>
+  </section>
+</section>
+
+<section>
+  <h2><span class="n">6</span>La pantalla Inicio</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Es lo primero que ves al abrir la app. De arriba abajo:</p>
+      <ul>
+        <li>El <b>cambio del día</b> (tócalo para cambiarlo).</li>
+        <li><b>Avisos</b>: productos con pérdida (rojo), productos con poco stock (amarillo), recordatorio de copia de seguridad.</li>
+        <li>Accesos rápidos: <b>Vender</b>, <b>Compra</b>, <b>Gasto</b> y <b>Cierre</b>.</li>
+        <li><b>Hoy</b>: lo vendido y la ganancia neta del día (ganancia de las ventas menos los gastos y mermas de hoy).</li>
+        <li><b>Caja</b> (efectivo) y <b>Transferencias</b>: el dinero que debería haber en cada sitio. Toca para ver los movimientos.</li>
+        <li>El botón <b>Hacer el cierre del día</b>, que pasa a verde cuando ya está hecho.</li>
+        <li>Las <b>últimas ventas</b> de hoy.</li>
+      </ul>
+      <p>Abajo está la barra con las cinco pestañas: <b>Inicio</b>, <b>Vender</b>, <b>Productos</b>, <b>Gastos</b> e <b>Informes</b>. La rueda de arriba abre los <b>Ajustes</b>.</p>
+    </div>
+    <figure><img src="../preview/01-inicio.png" alt=""><figcaption>Inicio con un aviso de pérdida.</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="../preview/02-inicio-abajo.png" alt=""><figcaption>Más abajo: el cierre y las últimas ventas.</figcaption></figure>
+    <figure><img src="../preview/30-inicio-oscuro.png" alt=""><figcaption>En modo oscuro, con el cambio sin actualizar (naranja).</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">7</span>Vender</h2>
+  <div class="split">
+    <div class="txt">
+      <p>En la pestaña <b>Vender</b> está la lista de productos con su precio y lo que queda.</p>
+      <ol class="steps">
+        <li>Toca un producto (o su botón <span class="k">+</span>) para añadirlo al carrito. Tócalo otra vez para sumar otra unidad; con <span class="k">−</span> quitas una.</li>
+        <li>Usa el <b>buscador</b> o las <b>categorías</b> para encontrarlo más rápido.</li>
+        <li>Abajo aparece la barra verde con el número de artículos y el total. Toca <b>Cobrar</b>.</li>
+      </ol>
+      <p>Los productos agotados salen al final con la palabra <b>agotado</b>; los que dan pérdida llevan un aviso rojo.</p>
+      <div class="tip"><b>Vaciar el carrito</b>Toca la papelera de la barra verde. Si fue sin querer, toca <b>Deshacer</b>.</div>
+    </div>
+    <figure><img src="../preview/05-carrito.png" alt=""><figcaption>Cuatro artículos en el carrito.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h3 style="margin-top:0">Cobrar</h3>
+  <div class="split">
+    <div class="txt">
+      <ul>
+        <li>Cambia las <b>cantidades</b> con <span class="k">−</span> <span class="k">+</span> o escribiéndolas.</li>
+        <li>El <b>precio</b> de cada producto se puede cambiar solo para esta venta (una rebaja, un precio especial). Si queda por debajo del mínimo, sale en rojo «pierdes dinero».</li>
+        <li>Elige la <b>forma de pago</b>:
+          <ul>
+            <li><b>Efectivo</b>: escribe cuánto te da el cliente y la app calcula el <b>vuelto</b>.</li>
+            <li><b>Transferencia</b>: comprueba en tu teléfono que llegó antes de entregar.</li>
+            <li><b>Mixto</b>: escribe la parte en efectivo; el resto cuenta como transferencia.</li>
+          </ul>
+        </li>
+        <li>Toca <b>Confirmar venta</b>. El stock se descuenta y el dinero se suma a la caja o a transferencias.</li>
+      </ul>
+      <p>Justo después aparece abajo «Venta registrada» con el botón <b>Deshacer</b> por si te equivocaste: la venta se borra y los productos vuelven al carrito.</p>
+      <div class="warn"><b>¿Vendes más de lo que la app cree que hay?</b>Te pregunta si quieres seguir. Puedes vender igual y luego corregir el stock con «Contar stock».</div>
+    </div>
+    <figure><img src="../preview/06-cobrar.png" alt=""><figcaption>Le dan 2,000 CUP: vuelto de 50.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">8</span>Historial, detalle y anular ventas</h2>
+  <div class="split">
+    <div class="txt">
+      <p>En <b>Vender</b> toca el reloj de arriba a la derecha (o <b>Ver todas</b> en Inicio) para ver las ventas de un día. Con las flechas o tocando la fecha cambias de día. Arriba ves el número de ventas, lo vendido y la ganancia de ese día.</p>
+      <p>Toca una venta para ver su <b>detalle</b>: productos, precio de cada uno, lo que costaron, la <b>ganancia</b> y el <b>cambio</b> con que se hizo.</p>
+      <p>Con el menú <span class="k">⋮</span>:</p>
+      <ul>
+        <li><b>Anular venta</b>: deja de contar en el dinero y las estadísticas, y los productos <b>vuelven al inventario</b>. Se puede recuperar después.</li>
+        <li><b>Eliminar venta</b>: la borra por completo.</li>
+      </ul>
+    </div>
+    <figure><img src="../preview/09-venta-detalle.png" alt=""><figcaption>El detalle muestra precio, costo y cambio guardados.</figcaption></figure>
+  </div>
+  <div class="note"><b>El candado del detalle</b>«Los precios, el costo y el cambio de esta venta quedaron guardados al venderla.» Es la garantía de que cambiar un precio después no modifica lo que entró ese día.</div>
+</section>
+
+<section>
+  <h2><span class="n">9</span>Productos e inventario</h2>
+  <div class="split">
+    <div class="txt">
+      <p>La pestaña <b>Productos</b> muestra arriba un resumen:</p>
+      <ul>
+        <li><b>Productos</b> y unidades que tienes.</li>
+        <li><b>Invertido (costo)</b>: lo que costó en dólares toda la mercancía que hay (y su valor en CUP al cambio de hoy).</li>
+        <li><b>Valor de venta</b>: lo que entraría si vendieras todo a los precios actuales.</li>
+      </ul>
+      <p>En cada producto ves el precio, la cantidad, el <b>mínimo</b> de hoy y etiquetas: <b>Pérdida</b>, <b>Ganancia baja</b>, <b>Sin precio</b>, <b>Poco stock</b>, <b>Agotado</b>.</p>
+      <p>Los filtros de arriba separan los que hay que <b>revisar de precio</b>, los de <b>poco stock</b>, los <b>agotados</b> y los <b>ocultos</b>.</p>
+      <p>El botón <span class="k">+ Nuevo</span> sirve para crear un producto o registrar una compra.</p>
+    </div>
+    <figure><img src="../preview/10-productos.png" alt=""><figcaption>Lista de productos con el resumen del inventario.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h3 style="margin-top:0">La ficha de un producto</h3>
+  <div class="split">
+    <div class="txt">
+      <p>Toca un producto para ver su ficha:</p>
+      <ul>
+        <li>Cuántas unidades hay en el puesto.</li>
+        <li><b>Precio de venta</b>, <b>costo</b> en USD, <b>mínimo hoy</b>, <b>sugerido</b> y la <b>ganancia</b> por unidad (en CUP y %).</li>
+        <li>Si da pérdida, un aviso rojo explica cuánto pierdes en cada unidad.</li>
+        <li><b>Cambiar precio</b> o <b>Usar</b> el sugerido con un toque.</li>
+        <li>Botones para <b>Registrar compra</b>, <b>Merma / consumo</b> y <b>Contar stock</b>.</li>
+        <li><b>Movimientos</b>: cada venta, compra y ajuste. Toca uno para ver el detalle.</li>
+        <li><b>Historial de precios</b> con la fecha y el cambio de cada precio.</li>
+      </ul>
+      <p>En el menú <span class="k">⋮</span>: <b>Editar</b> (nombre, categoría, unidad, aviso de stock o corregir el costo), <b>Ocultar</b> (deja de salir en las listas pero sus ventas siguen contando) y <b>Eliminar</b>.</p>
+    </div>
+    <figure><img src="../preview/11-producto-perdida.png" alt=""><figcaption>Huevos: costaron 9 USD = 4,050 CUP y se venden a 3,730.</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="../preview/12-cambiar-precio.png" alt=""><figcaption>Cambiar el precio.</figcaption></figure>
+    <figure><img src="../preview/15-producto-historial.png" alt=""><figcaption>Movimientos e historial de precios.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">10</span>Registrar compras de mercancía</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Cada vez que compres mercancía: <b>Inicio → Compra</b>, o en Productos <span class="k">+ Nuevo</span> → <b>Registrar compra</b>.</p>
+      <ol class="steps">
+        <li>Revisa la <b>fecha</b> y el <b>cambio</b> (viene el de hoy).</li>
+        <li>Elige la <b>moneda</b> en que pagaste: dólares o pesos.</li>
+        <li><b>Añadir producto</b>: búscalo en la lista. Si es nuevo, toca <b>Nuevo producto</b> ahí mismo.</li>
+        <li>Escribe la <b>cantidad</b> y el <b>costo por unidad</b>.</li>
+        <li>La app muestra el <b>costo promedio</b> (con lo que ya tenías), el <b>mínimo</b>, el <b>sugerido</b> y el precio actual, y rellena el <b>precio de venta</b> con el sugerido. Cámbialo si quieres.</li>
+        <li>Indica <b>de dónde salió el dinero</b>.</li>
+        <li>Toca <b>Guardar</b>: se suma al stock, se actualiza el costo y se ponen los precios.</li>
+      </ol>
+    </div>
+    <figure><img src="../preview/18-compra.png" alt=""><figcaption>Compra de refrescos y leche en polvo.</figcaption></figure>
+  </div>
+  <div class="split left">
+    <figure><img src="../preview/19-compra-abajo.png" alt=""><figcaption>Total y de dónde salió el dinero.</figcaption></figure>
+    <div class="txt">
+      <h3 style="margin-top:0">¿De dónde salió el dinero?</h3>
+      <table>
+        <tr><th>Opción</th><th>Cuándo usarla</th></tr>
+        <tr><td><b>Dinero aparte</b></td><td>Pagaste con dólares que tenías guardados. No toca la caja del puesto.</td></tr>
+        <tr><td><b>Caja (efectivo)</b></td><td>Pagaste con el efectivo de la caja. Se descuenta de la caja.</td></tr>
+        <tr><td><b>Transferencia / tarjeta</b></td><td>Pagaste desde tu saldo de transferencias.</td></tr>
+      </table>
+      <div class="tip"><b>¿Compraste dólares con pesos de la caja?</b>Anótalo como <b>Retirar</b> en el dinero de la caja (capítulo 13) y luego registra la compra como «Dinero aparte». Así la caja cuadra al cerrar.</div>
+      <p>Las compras <b>no se restan de la ganancia</b>: se convierten en mercancía. Lo que cuesta cada producto se descuenta cuando lo vendes. Se ven en <b>Gastos → Compras de mercancía</b>, donde puedes abrirlas para editarlas o eliminarlas.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">11</span>Mermas, consumo propio y conteo</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Desde la ficha del producto:</p>
+      <ul>
+        <li>Botón <b>Merma / consumo</b>, y elige:
+          <ul>
+            <li><b>Merma / vencido / roto</b>: algo que se echó a perder o se perdió. Se descuenta del stock y su costo cuenta como <b>pérdida</b> en las estadísticas.</li>
+            <li><b>Consumo propio</b>: lo que te llevas para la casa. También se descuenta y cuenta al costo.</li>
+          </ul>
+          Después escribe la cantidad y, si quieres, el motivo.</li>
+        <li><b>Contar stock</b>: escribe cuántas hay de verdad y la app corrige la diferencia.</li>
+      </ul>
+      <p>Para revisar muchos productos de una vez: <b>Productos → ⋮ → Contar todo el inventario</b>. Escribe solo los que no coincidan y toca <b>Guardar</b>.</p>
+      <div class="tip"><b>Consejo</b>Cuenta todo el inventario una vez a la semana o al mes. Si la app y la realidad no coinciden a menudo, puede que se olvide anotar alguna venta.</div>
+    </div>
+    <figure><img src="../preview/21-merma.png" alt=""><figcaption>Dar de baja 2 paquetes vencidos.</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="../preview/21a-merma-menu.png" alt=""><figcaption>Merma o consumo propio.</figcaption></figure>
+    <figure><img src="../preview/38-contar-inventario.png" alt=""><figcaption>Contar todo el inventario.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">12</span>Gastos del negocio</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Todo lo que gastas para el negocio y no es mercancía: <b>mensajería</b>, <b>transporte</b>, <b>impuestos</b>, corriente y agua, bolsas, teléfono, <b>imprevistos</b>…</p>
+      <ol class="steps">
+        <li><b>Inicio → Gasto</b>, o en la pestaña <b>Gastos</b> el botón <span class="k">+ Nuevo gasto</span>.</li>
+        <li>Elige la <b>categoría</b> (o crea una con <b>+ Nueva</b>).</li>
+        <li>Escribe el <b>importe</b> en CUP o en USD (en USD la app lo convierte con el cambio).</li>
+        <li>Indica <b>con qué se pagó</b>: caja, transferencia o dinero aparte.</li>
+        <li>Añade un detalle si quieres y toca <b>Guardar</b>.</li>
+      </ol>
+      <p>Los gastos se <b>restan de la ganancia neta</b> en Inicio, en el cierre y en los informes. En la pestaña <b>Gastos</b> se ven por mes, con el total arriba. Toca uno para editarlo o eliminarlo (menú <span class="k">⋮</span>).</p>
+    </div>
+    <figure><img src="../preview/23-gasto-nuevo.png" alt=""><figcaption>Un gasto de transporte pagado de la caja.</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="../preview/22-gastos.png" alt=""><figcaption>Gastos del mes.</figcaption></figure>
+    <figure><img src="../preview/24-compras.png" alt=""><figcaption>Compras de mercancía del mes.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">13</span>El dinero: caja y transferencias</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Toca la tarjeta <b>Caja / Transferencias</b> de Inicio. La app lleva dos cuentas:</p>
+      <ul>
+        <li><b>Caja (efectivo)</b>: suma las ventas en efectivo y resta los gastos y compras pagados de la caja.</li>
+        <li><b>Transferencias</b>: lo cobrado por transferencia menos lo pagado desde ahí.</li>
+      </ul>
+      <p>Botones:</p>
+      <ul>
+        <li><b>Añadir</b>: dinero que metes en el negocio (por ejemplo, menudo para dar vuelto).</li>
+        <li><b>Retirar</b>: dinero que sacas (para la casa, para comprar dólares…).</li>
+        <li><b>Contar</b>: escribe lo que hay de verdad y la app corrige la diferencia.</li>
+      </ul>
+      <p>Debajo están todos los movimientos de la cuenta elegida. Toca uno para verlo.</p>
+      <div class="note"><b>Retirar no es un gasto</b>Sacar dinero para ti o para comprar dólares no reduce la ganancia del negocio; solo cambia lo que debe haber en la caja. Un gasto (mensajería, impuestos…) sí reduce la ganancia.</div>
+    </div>
+    <figure><img src="../preview/29-dinero.png" alt=""><figcaption>Saldo y movimientos de la caja.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">14</span>El cierre del día</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Al terminar el día toca <b>Hacer el cierre del día</b> (Inicio) o <b>Cierre</b> en los accesos rápidos. La pantalla tiene tres partes:</p>
+      <ol class="steps">
+        <li><b>Ventas del día</b>: cada producto vendido con su cantidad e importe, el total, y cuánto fue en efectivo y por transferencia.</li>
+        <li><b>Ganancia</b>: lo vendido menos lo que costó esa mercancía = ganancia de las ventas; menos los gastos y mermas del día = <b>ganancia neta</b> (o pérdida neta), también en dólares.</li>
+        <li><b>Dinero en la caja</b>: lo que había al empezar + ventas en efectivo − gastos y compras pagados de la caja ± dinero añadido o retirado = <b>Debería haber</b>.</li>
+      </ol>
+      <p>Cuenta el efectivo y escríbelo en <b>¿Cuánto efectivo hay contado?</b>. Al momento verás si <b>la caja cuadra</b>, si <b>sobra</b> o si <b>falta</b> dinero.</p>
+    </div>
+    <figure><img src="../preview/33-cierre.png" alt=""><figcaption>Ventas y ganancia del día.</figcaption></figure>
+  </div>
+  <div class="split left">
+    <figure><img src="../preview/34-cierre-caja.png" alt=""><figcaption>Faltan 54 CUP al contar.</figcaption></figure>
+    <div class="txt">
+      <p>Si hubo transferencias, un recuadro te recuerda cuánto entró para que lo compruebes en la app del banco.</p>
+      <p>Toca <b>Guardar cierre</b>. La app te dice el resultado y la ganancia neta. Si sobró o faltó, anota la diferencia para que <b>mañana la caja empiece con lo que contaste</b>.</p>
+      <p>Con <b>Compartir</b> envías el resumen por <b>WhatsApp</b> (o a quien quieras).</p>
+      <ul>
+        <li>Con las flechas de arriba puedes ver o rehacer el cierre de otro día.</li>
+        <li>Si después de cerrar anotas más ventas o gastos de ese día, la app te avisa para que lo vuelvas a guardar.</li>
+        <li>Los cierres guardados aparecen en <b>Informes</b>, con lo que sobró o faltó cada día.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div class="txt">
+      <h3 style="margin-top:0">El resumen que se comparte</h3>
+      <pre>🌿 *Green Place* — Cierre del día
+Miércoles, 7 de octubre
+Cambio: 1 USD = 450 CUP
+
+🛒 *Ventas:* 10 ventas · 31 productos
+  • 6 × Refresco de lata — 2,040 CUP
+  • 2 × Frijoles negros 1 kg — 2,040 CUP
+  • 2 × Arroz 1 kg — 1,520 CUP
+  • …
+Total vendido: *11,480 CUP*
+  Efectivo 7,890 CUP · Transferencia 3,590 CUP
+
+💰 Ganancia de las ventas: 2,163 CUP
+🧾 Gastos: −750 CUP (Transporte 400, Mensajería 350)
+📈 *Ganancia neta: 1,413 CUP* (≈ 3.31 USD)
+
+💵 *Caja (efectivo)*
+  Al empezar: 21,614 CUP
+  + Ventas en efectivo: 7,890 CUP
+  − Gastos pagados de la caja: 750 CUP
+  Debería haber: *28,754 CUP*
+  Contado: 28,700 CUP
+  ⚠️ Faltan 54 CUP
+🏦 Transferencias recibidas hoy: 3,590 CUP</pre>
+    </div>
+    <figure><img src="../preview/35-cierre-resultado.png" alt=""><figcaption>Resultado al guardar el cierre.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">15</span>Informes y estadísticas</h2>
+  <div class="split">
+    <div class="txt">
+      <p>En la pestaña <b>Informes</b> eliges qué analizar: <b>Día</b>, <b>Semana</b> (lunes a domingo), <b>Mes</b> o <b>Año</b>. Con las flechas pasas al periodo anterior o siguiente; tocando la fecha eliges cualquier otra.</p>
+      <ul>
+        <li><b>Ganancia neta</b> del periodo (y su equivalente en dólares).</li>
+        <li><b>Vendido</b>, comparado con el periodo anterior. Si el periodo no ha terminado, compara con el mismo tramo («a esta altura»).</li>
+        <li>Número de <b>ventas</b> y de productos vendidos.</li>
+        <li><b>Gastos</b> y mermas.</li>
+        <li><b>Ganancia media</b>: cuánto ganas, en promedio, sobre lo que cuesta la mercancía.</li>
+      </ul>
+    </div>
+    <figure><img src="../preview/25-informes-semana.png" alt=""><figcaption>Informe de la semana.</figcaption></figure>
+  </div>
+  <div class="split left">
+    <figure><img src="../preview/26-informes-grafico.png" alt=""><figcaption>Toca una columna para ver sus cifras.</figcaption></figure>
+    <div class="txt">
+      <p>El <b>gráfico</b> muestra en azul lo vendido y en verde la ganancia de cada día (por horas en el informe del día, por meses en el del año). Toca una columna para ver sus cifras; con <b>Ver como tabla</b> aparecen todos los números.</p>
+      <p><b>De lo vendido a la ganancia neta</b> explica paso a paso el cálculo: vendido − costo de lo vendido = ganancia de las ventas − gastos − mermas = ganancia neta. Incluye lo cobrado en efectivo y por transferencia y lo <b>invertido en mercancía</b> en ese periodo.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="split">
+    <div class="txt">
+      <h3 style="margin-top:0">Productos más vendidos, gastos por tipo y cierres</h3>
+      <ul>
+        <li><b>Productos más vendidos</b>: tabla con la cantidad, lo vendido y la ganancia de cada producto. Ordénala por <b>Más vendido</b>, <b>Más ganancia</b> o <b>Más unidades</b>. Sirve para saber qué conviene comprar más y qué deja poca ganancia.</li>
+        <li><b>Gastos por tipo</b>: en qué se fue el dinero de los gastos (mensajería, impuestos…).</li>
+        <li><b>Cierres del día</b> del periodo: la ganancia neta de cada día y si la caja cuadró, sobró o faltó. Toca uno para abrirlo.</li>
+      </ul>
+      <div class="note"><b>Ganancia en CUP y en USD</b>Como el peso pierde valor, la app muestra también la ganancia en dólares, calculada con el cambio de cada venta. Así puedes comparar meses aunque el cambio haya subido.</div>
+    </div>
+    <figure><img src="../preview/27-informes-mes.png" alt=""><figcaption>Informe del mes: desglose y productos más vendidos.</figcaption></figure>
+  </div>
+  <div class="pair">
+    <figure><img src="../preview/28-informes-dia.png" alt=""><figcaption>Informe del día, ventas por hora.</figcaption></figure>
+    <figure><img src="../preview/32-informes-oscuro.png" alt=""><figcaption>Informes en modo oscuro.</figcaption></figure>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">16</span>Ajustes y copias de seguridad</h2>
+  <div class="split">
+    <div class="txt">
+      <p>Toca la rueda de arriba en Inicio:</p>
+      <ul>
+        <li><b>Cambio del dólar</b> y su <b>historial</b>.</li>
+        <li><b>Precios</b>: la ganancia sugerida (30%), el redondeo, el aviso de ganancia baja (10%) y el aviso de poco stock.</li>
+        <li><b>Negocio</b>: nombre del negocio, tu nombre y las <b>categorías de gastos</b>.</li>
+        <li><b>Contar todo el inventario</b>.</li>
+        <li><b>Hacer copia de seguridad</b> y <b>Restaurar una copia</b>.</li>
+        <li><b>Instalar en el teléfono</b> y este <b>manual</b>.</li>
+        <li><b>Borrar todos los datos</b> (pide confirmación escribiendo BORRAR).</li>
+      </ul>
+      <h3>Copia de seguridad</h3>
+      <p>Toca <b>Hacer copia de seguridad</b>. Android te deja elegir dónde enviarla: <b>Google Drive</b>, <b>WhatsApp</b> (por ejemplo, un chat contigo misma) o Archivos. Si no aparece ese menú, se guarda en <b>Descargas</b>. Si pasa una semana sin copia, Inicio te lo recuerda.</p>
+      <p>Para recuperar los datos (en el mismo teléfono o en uno nuevo con la app instalada): <b>Restaurar una copia</b> y elige el archivo <i>green-place-copia-…json</i>.</p>
+      <div class="warn"><b>Restaurar reemplaza todo</b>Los datos actuales del teléfono se sustituyen por los de la copia.</div>
+    </div>
+    <figure><img src="../preview/36-ajustes.png" alt=""><figcaption>Ajustes.</figcaption></figure>
+  </div>
+  <div class="pair"><figure><img src="../preview/37-historial-cambio.png" alt=""><figcaption>Historial del cambio.</figcaption></figure></div>
+</section>
+
+<section>
+  <h2><span class="n">17</span>La rutina de cada día</h2>
+  <h3>Al abrir</h3>
+  <ul class="check">
+    <li>Escribe el <b>cambio de hoy</b> cuando la app lo pregunte.</li>
+    <li>Si sale el aviso rojo de pérdida, toca <b>Revisar precios</b> y actualiza los que hagan falta.</li>
+    <li>Mira los productos con <b>poco stock</b> para saber qué comprar.</li>
+  </ul>
+  <h3>Durante el día</h3>
+  <ul class="check">
+    <li>Anota <b>cada venta</b> en la pestaña Vender en el momento.</li>
+    <li>Anota los <b>gastos</b> (mensajero, transporte…) cuando ocurran.</li>
+    <li>Cuando llegue mercancía, <b>Registrar compra</b> con lo que costó.</li>
+    <li>Si sacas o metes dinero en la caja, anótalo en <b>Retirar</b> o <b>Añadir</b>.</li>
+  </ul>
+  <h3>Al cerrar</h3>
+  <ul class="check">
+    <li>Haz el <b>cierre del día</b>: cuenta el efectivo y escríbelo.</li>
+    <li>Comprueba en el banco las <b>transferencias</b> del día.</li>
+    <li>Guarda el cierre y, si quieres, <b>compártelo</b> por WhatsApp.</li>
+  </ul>
+  <h3>Cada semana</h3>
+  <ul class="check">
+    <li>Mira el <b>informe de la semana</b>: lo vendido, la ganancia neta y los productos que más dejan.</li>
+    <li>Haz una <b>copia de seguridad</b> y guárdala en Drive o WhatsApp.</li>
+    <li>De vez en cuando, <b>cuenta todo el inventario</b>.</li>
+  </ul>
+</section>
+
+<section>
+  <h2><span class="n">18</span>Preguntas frecuentes</h2>
+  <dl class="faq">
+    <dt>Si cambio el precio de un producto, ¿cambian las ventas que ya hice?</dt>
+    <dd>No. Cada venta guarda su precio, su costo y el cambio del momento. El nuevo precio solo se usa en las ventas siguientes.</dd>
+    <dt>Subió el dólar, ¿tengo que cambiar todos los precios?</dt>
+    <dd>Solo los que den pérdida o poca ganancia. La app te los muestra en «Revisar precios» y puedes poner el sugerido a todos con un toque.</dd>
+    <dt>Un cliente quiere una rebaja.</dt>
+    <dd>Al cobrar, cambia el precio de ese producto solo para esa venta. Si queda por debajo del mínimo, la app te avisa antes de confirmar.</dd>
+    <dt>Me equivoqué en una venta.</dt>
+    <dd>Justo después, toca «Deshacer». Si ya pasó el momento, abre la venta en el historial y usa ⋮ → Anular venta, y vuelve a hacerla bien.</dd>
+    <dt>Compré mercancía a otro precio. ¿Qué precio mínimo uso?</dt>
+    <dd>La app calcula el costo promedio de lo que tienes y lo usa para el mínimo y el sugerido.</dd>
+    <dt>¿Por qué la ganancia neta del día es menor que «lo vendido menos lo que costó»?</dt>
+    <dd>Porque también se restan los gastos (mensajería, impuestos…) y las mermas de ese día.</dd>
+    <dt>Me sobra o me falta dinero al cerrar.</dt>
+    <dd>Revisa si falta anotar alguna venta, gasto o retiro. Si no encuentras la causa, guarda el cierre igual: la diferencia queda anotada y mañana la caja empieza con lo contado.</dd>
+    <dt>¿Necesito internet?</dt>
+    <dd>Solo la primera vez para instalarla y para recibir actualizaciones. Después funciona sin conexión.</dd>
+    <dt>Voy a cambiar de teléfono.</dt>
+    <dd>Haz una copia de seguridad en el teléfono viejo, instala la app en el nuevo y usa Ajustes → Restaurar una copia.</dd>
+    <dt>¿Alguien más puede ver mis ventas?</dt>
+    <dd>No. Los datos están solo en tu teléfono. Lo que se publica en internet es el programa, no tus datos.</dd>
+  </dl>
+</section>
+
+<section>
+  <h2><span class="n">19</span>Anexo: publicar y actualizar la app</h2>
+  <p>Esta parte es para quien mantiene la app (no hace falta para usarla).</p>
+  <h3>Publicar con GitHub Pages (una sola vez)</h3>
+  <ol class="steps">
+    <li>Fusiona la rama de trabajo en <b>main</b> del repositorio <b>MarcoH03/Webapp_green_place</b>.</li>
+    <li>En GitHub: <b>Settings → Pages → Build and deployment → Source: Deploy from a branch</b>, rama <b>main</b>, carpeta <b>/ (root)</b> → <b>Save</b>.</li>
+    <li>En uno o dos minutos la app estará en <b>https://marcoh03.github.io/Webapp_green_place/</b>.</li>
+  </ol>
+  <p>El repositorio es público, así que GitHub Pages es gratuito. En él solo está el código y datos de ejemplo inventados para las capturas: las ventas reales nunca salen del teléfono.</p>
+  <h3>Publicar una versión nueva</h3>
+  <p>Sube el número de <b>VERSION</b> en <i>sw.js</i> y <b>APP_VERSION</b> en <i>js/store.js</i>. Los teléfonos verán el aviso «Hay una nueva versión» y conservarán sus datos.</p>
+  <h3>Regenerar capturas y este manual</h3>
+  <pre>npx http-server -p 8080 -c-1 .
+NODE_PATH=$(npm root -g) node tools/screenshots.cjs
+DARK=1 NODE_PATH=$(npm root -g) node tools/screenshots.cjs
+NODE_PATH=$(npm root -g) node tools/make-manual.cjs</pre>
+</section>
+
+</body>
+</html>

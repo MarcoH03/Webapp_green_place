@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f8f4e"/>
+      <stop offset="1" stop-color="#145c30"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#bg)"/>
+  <g transform="translate(512 512)">
+    <!-- toldo del puesto -->
+    <path d="M-250 -150 L-210 -250 H210 L250 -150 Z" fill="#e8f7ec"/>
+    <path d="M-250 -150 a62.5 50 0 0 0 125 0 a62.5 50 0 0 0 125 0 a62.5 50 0 0 0 125 0 a62.5 50 0 0 0 125 0 Z" fill="#ffffff"/>
+    <path d="M-125 -150 a62.5 50 0 0 0 125 0 Z M125 -150 a62.5 50 0 0 0 125 0 Z" fill="#c6ecd0"/>
+    <!-- cuerpo -->
+    <rect x="-215" y="-90" width="430" height="330" rx="34" fill="#ffffff"/>
+    <!-- hoja -->
+    <path d="M-95 170 C-120 40 -40 -40 120 -55 C125 95 50 175 -95 170 Z" fill="#2f8f4e"/>
+    <path d="M-95 170 C-30 90 30 30 95 -25" stroke="#e8f7ec" stroke-width="22" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>
